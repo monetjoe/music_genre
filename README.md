@@ -1,6 +1,6 @@
 # 音乐流派识别器 WebUI
 [![license](https://img.shields.io/github/license/monetjoe/music_genre.svg)](./LICENSE)
-[![Python application](https://github.com/monetjoe/music_genre/actions/workflows/python-app.yml/badge.svg?branch=main)](https://github.com/monetjoe/music_genre/actions/workflows/python-app.yml?query=branch%3Amain)
+[![auto-sync](https://github.com/monetjoe/music_genre/actions/workflows/auto-sync.yml/badge.svg)](https://github.com/monetjoe/music_genre/actions/workflows/auto-sync.yml)
 [![hf](https://img.shields.io/badge/huggingface-music__genre-ffd21e.svg)](https://huggingface.co/spaces/ccmusic-database/music_genre)
 [![ms](https://img.shields.io/badge/modelscope-music__genre-624aff.svg)](https://modelscope.cn/studios/ccmusic-database/music_genre)
 
