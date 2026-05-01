@@ -30,7 +30,7 @@ jobs:
           GIT_NAME: ${{ secrets.GIT_NAME }}
           GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
         run: |
-          git clone https://oauth2:$HF_TOKEN@huggingface.co/spaces/ccmusic-database/music_genre ../hf_repo
+          git clone https://oauth2:$HF_TOKEN@huggingface.co/spaces/monetjoe/music_genre ../hf_repo
           mv -f ./.github/restart.py ../
           rm -rf ./LICENSE ./README.md ./.github ./.git ./.gitattributes ./.gitignore
           cp -rf ../hf_repo/.git ../hf_repo/README.md ../hf_repo/requirements.txt ./
@@ -79,7 +79,7 @@ jobs:
           GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
           MD_URL: ${{ vars.MD_URL }}
         run: |
-          GIT_LFS_SKIP_SMUDGE=1 git clone https://oauth2:$HF_TOKEN@huggingface.co/spaces/ccmusic-database/music_genre ./hf_repo
+          GIT_LFS_SKIP_SMUDGE=1 git clone https://oauth2:$HF_TOKEN@huggingface.co/spaces/monetjoe/music_genre ./hf_repo
           cd ./hf_repo
           LATEST_VER=$(curl -s "$MD_URL" | tr -d '\n' | grep -oP '(?<=<code>).*?(?=</code>)')
           if [ -n "$LATEST_VER" ]; then
