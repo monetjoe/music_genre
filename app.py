@@ -16,8 +16,8 @@ from model import EvalNet
 from utils import (
     get_modelist,
     find_mp3_files,
-    download,
     _L,
+    MODEL_DIR,
     CACHE_DIR,
     TRANSLATE,
     CLASSES,
@@ -144,9 +144,7 @@ if __name__ == "__main__":
     ffmpeg = "ffmpeg-release-amd64-static"
     if sys.platform.startswith("linux"):
         if not os.path.exists(f"./{ffmpeg}.tar.xz"):
-            download(
-                f"https://www.modelscope.cn/studio/ccmusic-database/music_genre/resolve/master/{ffmpeg}.tar.xz"
-            )
+            shutil.move(os.path.abspath(f"{MODEL_DIR}/{ffmpeg}"), f"./{ffmpeg}.tar.xz")
 
         folder_path = f"{os.getcwd()}/{ffmpeg}"
         if not os.path.exists(folder_path):
@@ -178,9 +176,7 @@ if __name__ == "__main__":
             title=_L("建议录音时长保持在 15s 以内, 过长会影响识别效率"),
         )
 
-        gr.Markdown(
-            f"# {_L('引用')}"
-            + """
+        gr.Markdown(f"# {_L('引用')}" + """
             ```bibtex
             @dataset{zhaorui_liu_2021_5676893,
                 author    = {Zhaorui Liu and Zijin Li},
@@ -192,7 +188,6 @@ if __name__ == "__main__":
                 doi       = {10.5281/zenodo.5676893},
                 url       = {https://doi.org/10.5281/zenodo.5676893}
             }
-            ```"""
-        )
+            ```""")
 
     demo.launch(css="#gradio-share-link-button-0 { display: none; }", ssr_mode=False)

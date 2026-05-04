@@ -1,7 +1,5 @@
 import os
 import torch
-import requests
-
 
 EN_US = os.getenv("LANG") != "zh_CN.UTF-8"
 
@@ -113,16 +111,3 @@ def get_modelist(model_dir=MODEL_DIR, assign_model=""):
                 output.append(model)
 
     return output
-
-
-def download(url: str):
-    filename = url.split("/")[-1]
-    response = requests.get(url, stream=True)
-    if response.status_code == 200:
-        with open(filename, "wb") as f:
-            for chunk in response.iter_content(chunk_size=8192):
-                f.write(chunk)
-
-        print(f"文件已下载到 {os.getcwd()}/{filename}")
-    else:
-        print(f"下载失败，状态码：{response.status_code}")
