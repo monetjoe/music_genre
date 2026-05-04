@@ -142,13 +142,14 @@ def infer(mp3_path, log_name: str, folder_path=CACHE_DIR):
 if __name__ == "__main__":
     warnings.filterwarnings("ignore")
     ffmpeg = "ffmpeg-release-amd64-static"
+    ffmpeg_pkg = f"{ffmpeg}.tar.xz"
     if sys.platform.startswith("linux"):
-        if not os.path.exists(f"./{ffmpeg}.tar.xz"):
-            shutil.move(os.path.abspath(f"{MODEL_DIR}/{ffmpeg}"), f"./{ffmpeg}.tar.xz")
+        if not os.path.exists(f"./{ffmpeg_pkg}"):
+            shutil.move(os.path.abspath(f"{MODEL_DIR}/{ffmpeg_pkg}"), f"./{ffmpeg_pkg}")
 
         folder_path = f"{os.getcwd()}/{ffmpeg}"
         if not os.path.exists(folder_path):
-            subprocess.call(f"tar -xvf {ffmpeg}.tar.xz", shell=True)
+            subprocess.call(f"tar -xvf {ffmpeg_pkg}", shell=True)
 
         os.environ["PATH"] = f"{folder_path}:{os.environ.get('PATH', '')}"
 
