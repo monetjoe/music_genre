@@ -30,9 +30,9 @@ jobs:
           GIT_NAME: ${{ secrets.GIT_NAME }}
           GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
         run: |
-          git clone https://oauth2:$HF_TOKEN@huggingface.co/spaces/monetjoe/music_genre ../hf_repo
           mv -f ./.github/restart.py ../
-          rm -rf ./LICENSE ./README.md ./.github ./.git ./.gitattributes ./.gitignore
+          git clone https://oauth2:$HF_TOKEN@huggingface.co/spaces/monetjoe/music_genre ../hf_repo
+          rm -rf ./.git* ./LICENSE
           cp -rf ../hf_repo/.git ../hf_repo/README.md ../hf_repo/requirements.txt ./
           if [ -n "$(git status --porcelain)" ]; then
             echo "Files are different, committing changes..."
