@@ -16,11 +16,16 @@ from model import EvalNet
 from utils import (
     get_modelist,
     find_mp3_files,
-    _L,
+    ZH2EN,
     MODEL_DIR,
     CACHE_DIR,
     TRANSLATE,
     CLASSES,
+)
+
+I18N = gr.I18n(
+    zh={key: key for key in ZH2EN},
+    en=ZH2EN,
 )
 
 
@@ -131,7 +136,7 @@ def infer(mp3_path, log_name: str, folder_path=CACHE_DIR):
 
         max_count_item = most_common_element(outputs)
         filename = os.path.basename(mp3_path)
-        result = TRANSLATE[CLASSES[max_count_item]]
+        result = I18N(TRANSLATE[CLASSES[max_count_item]])
 
     except Exception as e:
         status = f"{e}"
@@ -163,21 +168,21 @@ if __name__ == "__main__":
         gr.Interface(
             fn=infer,
             inputs=[
-                gr.Audio(label=_L("上传 MP3 音频"), type="filepath"),
-                gr.Dropdown(choices=models, label=_L("选择模型"), value=models[0]),
+                gr.Audio(label=I18N("上传 MP3 音频"), type="filepath"),
+                gr.Dropdown(choices=models, label=I18N("选择模型"), value=models[0]),
             ],
             outputs=[
-                gr.Textbox(label=_L("状态栏"), buttons=["copy"]),
-                gr.Textbox(label=_L("音频文件名"), buttons=["copy"]),
-                gr.Textbox(label=_L("流派识别"), buttons=["copy"]),
+                gr.Textbox(label=I18N("状态栏"), buttons=["copy"]),
+                gr.Textbox(label=I18N("音频文件名"), buttons=["copy"]),
+                gr.Textbox(label=I18N("流派识别"), buttons=["copy"]),
             ],
             examples=examples,
             cache_examples=False,
             flagging_mode="never",
-            title=_L("建议录音时长保持在 15s 以内, 过长会影响识别效率"),
+            title=I18N("建议录音时长保持在 15s 以内, 过长会影响识别效率"),
         )
 
-        gr.Markdown(f"# {_L('引用')}" + """
+        gr.Markdown(f"# {I18N('引用')}" + """
             ```bibtex
             @dataset{zhaorui_liu_2021_5676893,
                 author    = {Zhaorui Liu and Zijin Li},
@@ -193,6 +198,7 @@ if __name__ == "__main__":
 
     demo.launch(
         theme=gr.themes.Ocean(),
-        css="#gradio-share-link-button-0 { display: none; }",
+        css="#gradio-share-link-button-0, thead { display: none; }",
         ssr_mode=False,
+        i18n=I18N,
     )
